@@ -1,3 +1,5 @@
+#!/bin/bash
+
 start() {
   pid=$(pidof openconnect)
   if [[ -z $pid ]]; then
