@@ -33,7 +33,7 @@ done
 echo "Please enter your password for your VPN connection."
 read -s PASSWORD
 
-cp myvpn.config /tmp/myvpn.config
+cp ./config/myvpn.config /tmp/myvpn.config
 sed -i "s/PASSWORD/$PASSWORD/g" /tmp/myvpn.config
 sed -i "s/USER/$USER/g" /tmp/myvpn.config
 sed -i "s/PROTOCOL/$PROTOCOL/g" /tmp/myvpn.config
@@ -42,8 +42,8 @@ sed -i "s/GROUP/$GROUP/g" /tmp/myvpn.config
 
 sudo mkdir -p /etc/myvpn
 sudo cp /tmp/myvpn.config /etc/myvpn/
-sudo cp ./myvpn.sh /usr/bin/
-sudo chmod +x /usr/bin/myvpn.sh
+sudo cp ./bin/myvpn.sh /usr/bin/myvpn
+sudo chmod +x /usr/bin/myvpn
 
 echo "${green}myvpn is installed successfully."
-echo "${yellow}Usage: ./vpn_ulb.sh start|stop|status [-u|--user USER -p|--protocol PROTOCOL -d|--domain DOMAIN -g|--group GROUP] [--default]"
+echo "${yellow}Usage: myvpn start|stop|status [-u|--user USER -p|--protocol PROTOCOL -d|--domain DOMAIN -g|--group GROUP] [--default]"

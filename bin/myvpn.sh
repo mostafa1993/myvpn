@@ -1,17 +1,18 @@
 #!/bin/bash
 
 start() {
+  LOG_FILE=/tmp/myvpn_$(date +%T_%x | tr '/' '-').log
   pid=$(pidof openconnect)
   if [[ -z $pid ]]; then
     (sudo sh -c '(echo "$0" | sudo openconnect --user=$1 --protocol=$2 --passwd-on-stdin $3 --authgroup=$4) &\
       pid=$!; sleep 0.5; if test "$(ps | grep -w $pid)" = ""; then wait $pid; STATUS=$? > .tmp; else echo; STATUS=$?; fi;\
-      echo $STATUS > /tmp/.myvpn_status' $1 $2 $3 $4 $5) &> .log
+      echo $STATUS > /tmp/.myvpn_status' $1 $2 $3 $4 $5) &> $LOG_FILE
     STATUS=$(cat /tmp/.myvpn_status)
     if test $STATUS = "0"; then
       echo "${green}$4 Connection established successfully."
       return
     else
-      echo -e "${red}Connection could not be established. Error:\n$(cat .log)"
+      echo -e "${red}Connection could not be established. Error:\n$(cat $LOG_FILE)"
       exit 1
     fi
   fi
@@ -67,8 +68,14 @@ green=`tput setaf 2`
 yellow=`tput setaf 3`
 blue=`tput setaf 4`
 reset=`tput sgr0`
+USAGE="${yellow}Usage: myvpn start|stop|status [-u|--user USER -p|--protocol PROTOCOL -d|--domain DOMAIN -g|--group GROUP] [--default]"
 
 case "$1" in
+  -h|--h)
+    echo "$USAGE"
+    shift
+    exit 1
+    ;;
   start)
     ACTION=start
     shift
@@ -86,13 +93,18 @@ case "$1" in
     shift
     ;;
   *)
-    echo "${yellow}Usage: ./vpn_ulb.sh start|stop|status [-u|--user USER -p|--protocol PROTOCOL -d|--domain DOMAIN -g|--group GROUP] [--default]"
+    echo "${red}Unknown action. Use -h|--help option for the help message."
     exit 1
 esac
 
 
 for arg in "$@"; do
   case $arg in
+    -h|--h)
+      echo "$USAGE"
+      shift
+      exit 1
+      ;;
     -p=*|--protocol=*)
       PROTOCOL="${arg#*=}"
       shift
@@ -118,7 +130,8 @@ for arg in "$@"; do
       shift
       ;;
     *)
-      # unknown option
+      echo "${red}Unknown option. Use -h|--help option for help message."
+      exit 1
       ;;
   esac
 done
@@ -138,7 +151,7 @@ if [[ $DEFAULT = "YES" ]]; then
 else
   if [[ $ACTION = "start" ]] && ([[ -z $USER ]] || [[ -z $PROTOCOL ]] || [[ -z $DOMAIN ]]); then
     echo "$PASSWORD $USER $PROTOCOL $DOMAIN"
-    echo "${yellow}Usage: ./vpn_ulb.sh start|stop|status [-u|--user USER -p|--protocol PROTOCOL -d|--domain DOMAIN -g|--group GROUP] [--default]"
+    echo "$USAGE"
     exit 1
   fi
 fi
