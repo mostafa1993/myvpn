@@ -1,4 +1,4 @@
-**Install**
+**Install:**
 
 ```bash
 git clone git@github.com:mostafa1993/myvpn.git
@@ -8,9 +8,11 @@ git clone git@github.com:mostafa1993/myvpn.git
 If group is not specified for your case use `--group=GROUP=''`
 During installation you will be asked to enter your root and vpn password.
 
-**Usage**
 
-If you want to connect the vpn with your defualt settings, the ones used during installation, you only need to run:
+
+**Usage:**
+
+If you want to connect the vpn with your defualt settings, the ones used during installation, you only need to run,
 
 ```bash
 myvpn start --default
@@ -28,7 +30,9 @@ for stopping the vpn,
 myvpn stop
 ```
 
-**How to change default setting**
+
+
+**How to change default setting:**
 
 It is possible to change the default setting, the trivial option is to uninstall and install the program with new settings.
 
