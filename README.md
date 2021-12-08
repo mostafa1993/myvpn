@@ -6,7 +6,8 @@ git clone git@github.com:mostafa1993/myvpn.git
 ```
 
 If group is not specified in your case, use `--group=''`
-During installation you will be asked to enter your root and vpn password.
+
+During installation you will be asked to enter your `root` and vpn password.
 
 
 
@@ -25,10 +26,11 @@ If you want to connect with different settings,
 myvpn start -u=USER -p=PROTOCOL -d=DOMAIN -g=GROUP
 ```
 
-for stopping the vpn,
+for stopping/restarting the vpn,
 
 ```bash
 myvpn stop
+myvpn restart
 ```
 
 
@@ -38,4 +40,4 @@ myvpn stop
 
 It is possible to change the default setting, the trivial option is to uninstall and install the program with new settings.
 
-The beeter way is to access the config file and change the settings there. You may find the config file in `/etc/myvpn/myvpn.config`.
+The better way is to access the `configuration` file and change the settings there. You may find the `configuration` file in `/etc/myvpn/myvpn.config`.
