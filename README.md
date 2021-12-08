@@ -1,4 +1,4 @@
-**Install:**
+**Installation:**
 
 ```bash
 git clone git@github.com:mostafa1993/myvpn.git
@@ -7,6 +7,7 @@ git clone git@github.com:mostafa1993/myvpn.git
 
 If group is not specified for your case use `--group=GROUP=''`
 During installation you will be asked to enter your root and vpn password.
+
 
 
 
@@ -29,6 +30,7 @@ for stopping the vpn,
 ```bash
 myvpn stop
 ```
+
 
 
 
