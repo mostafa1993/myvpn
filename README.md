@@ -5,7 +5,7 @@ git clone git@github.com:mostafa1993/myvpn.git
 ./install.sh --user=USER --protocol=PROTOCOL --domain=DOMAIN --group=GROUP
 ```
 
-If group is not specified for your case use `--group=GROUP=''`
+If group is not specified in your case, use `--group=''`
 During installation you will be asked to enter your root and vpn password.
 
 
